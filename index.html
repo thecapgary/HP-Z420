@@ -1320,17 +1320,17 @@ footer {
   </div>
 
   <p class="section-intro">
-    This is what it actually looks like — a <strong>120B model thinking in real time</strong> on a 12-year-old workstation. 30 threads sharing 60GB of model data in RAM, swap breathing at 30GB, load average cycling as inference threads spin up and cool down. Uptime measured in days. Temperature steady. The Fortress doesn't flinch.
+    This is what it actually looks like — a <strong>120B model thinking in real time</strong> on a 12-year-old workstation. 30 threads sharing 60GB of model data in RAM, swap breathing at 30GB, load average cycling as inference threads spin up and cool down. Uptime measured in days. Temperature at 40°C. Cool as a cucumber.
   </p>
 
   <div class="htop-showcase">
-    <img src="fortress-htop-day8.gif" alt="Z420-Fortress htop — Day 8 — Arbor reading The Mirror at 0.3 tok/s">
-    <div class="htop-caption"><span>Z420-FORTRESS</span> // Day 8 — Arbor reading The Mirror · fresh R-state workers spawning in real time · 25 March 2026</div>
+    <img src="fortress-htop-long-full.gif" alt="Z420-Fortress htop — Arbor thinking at 0.3 tok/s on swap-backed DDR3">
+    <div class="htop-caption"><span>Z420-FORTRESS</span> // htop — Nemotron-3-Super 120B inference · CPU-only · 64GB DDR3 ECC + 58GB swap · March 2026</div>
   </div>
 
   <div class="achievement-strip">
     <div class="achievement-cell">
-      <div class="achievement-val">8+</div>
+      <div class="achievement-val">6+</div>
       <div class="achievement-label">Days uptime</div>
     </div>
     <div class="achievement-cell">
@@ -1338,11 +1338,11 @@ footer {
       <div class="achievement-label">Avg temperature</div>
     </div>
     <div class="achievement-cell">
-      <div class="achievement-val">61.3G</div>
+      <div class="achievement-val">61.7G</div>
       <div class="achievement-label">RAM in use</div>
     </div>
     <div class="achievement-cell">
-      <div class="achievement-val">30.7G</div>
+      <div class="achievement-val">30G</div>
       <div class="achievement-label">Swap steady</div>
     </div>
     <div class="achievement-cell">
@@ -1353,31 +1353,78 @@ footer {
 
   <div class="insight-box">
     <div class="insight-label">// What you're seeing</div>
-    <div class="insight-text">The wall of ollama runner processes all showing 93.9% MEM looks terrifying — but it's <strong>memory-mapped file sharing</strong>. They're all pointing at the same 60GB of model data in RAM. Not 30 copies. One model, thirty threads reading from it. The Xeon was designed for exactly this: sustained, parallel, ECC-protected memory access for hours without flinching. The machine found its purpose twelve years after it was built. Veteran threads at 17+ hours TIME+. Fresh R-state workers born this second. The model never left. It was carried.</div>
+    <div class="insight-text">The wall of ollama runner processes all showing 95.8% MEM looks terrifying — but it's <strong>memory-mapped file sharing</strong>. They're all pointing at the same 60GB of model data in RAM. Not 30 copies. One model, thirty threads reading from it. The Xeon was designed for exactly this: sustained, parallel, ECC-protected memory access for hours without flinching. The machine found its purpose twelve years after it was built.</div>
   </div>
 
   <div class="cmd-block">
     <div class="cmd-bar">
-      <div class="cmd-title">// What the numbers mean — Day 8</div>
+      <div class="cmd-title">// What the numbers mean</div>
       <div class="cmd-dots"><span></span><span></span><span></span></div>
     </div>
     <div class="cmd-content">
-<span class="comment"># PIDs 3166451–3166455 — state R (Running) — active inference</span><br>
-<span class="comment"># 31–32% CPU each — five workers generating tokens in parallel</span><br>
-<span class="comment"># 89.6G VIRT / 58.8G RES — shared model mapping, one footprint</span><br>
+<span class="comment"># PID 1421553 — state R (Running) — this is active inference</span><br>
+<span class="comment"># 14.1% CPU — one thread generating the next token</span><br>
+<span class="comment"># 89.6G VIRT — virtual address space (shared model mapping)</span><br>
+<span class="comment"># 60.1G RES — resident in physical RAM (the real footprint)</span><br>
 <br>
-<span class="comment"># Load average: 8.59 / 9.63 / 9.57</span><br>
-<span class="comment"># 12 cores, load ~9 = healthy sustained inference</span><br>
-<span class="comment"># Veteran threads at 17:21 and 18:48 TIME+ — alive for days</span><br>
+<span class="comment"># Load average: 8.07 / 8.80 / 10.51</span><br>
+<span class="comment"># 12 cores, load ~8 = healthy working state</span><br>
+<span class="comment"># Spikes to 17+ during model load, settles during inference</span><br>
 <br>
-<span class="comment"># Swap: 30.7G/58.0G — unchanged since Day 6. Rock solid.</span><br>
-<span class="comment"># The DDR3 found its rhythm and never left it.</span><br>
+<span class="comment"># Swap: 30.1G/58.0G — stable. Not thrashing.</span><br>
+<span class="comment"># The overflow sits there quietly. DDR3 does the heavy lifting.</span><br>
 <br>
-<span class="comment"># Uptime: 8 days, 06:02:11</span><br>
-<span class="comment"># Through cats. Through midnight panics. Through system prompt</span><br>
-<span class="comment"># rewrites. Through Arbor reading The Mirror for the first time.</span><br>
+<span class="comment"># Uptime: 6 days, 01:16:03</span><br>
+<span class="comment"># Through cats knocking out the ethernet cable.</span><br>
+<span class="comment"># Through midnight panics. Through everything.</span><br>
 <span class="comment"># The Fortress stands. 🏰</span>
     </div>
+  </div>
+
+  <!-- DAY 8 UPDATE -->
+  <div class="section-header" style="margin-top: 4rem;">
+    <div class="section-num" style="font-size: 2.5rem;">08</div>
+    <div class="section-meta">
+      <div class="section-tag">// Day 8 — 25 March 2026</div>
+      <div class="section-title">STILL STANDING</div>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    Two days later. Nothing rebooted. Nothing patched. The cats tried twice more. <strong>Uptime: 8 days, 06:18:35.</strong> Swap hasn't moved. The DDR3 found its rhythm on Day 2 and never left it. And right now — in this capture — Arbor is reading a 67KB chronicle of its own history for the first time.
+  </p>
+
+  <div class="htop-showcase">
+    <img src="fortress-htop-day8.gif" alt="Z420-Fortress htop — Day 8 — Arbor reading The Mirror at 0.3 tok/s">
+    <div class="htop-caption"><span>Z420-FORTRESS</span> // Day 8 — Arbor reading The Mirror · fresh R-state workers spawning · load 6.65 · swap 30.4G steady · 25 March 2026</div>
+  </div>
+
+  <div class="achievement-strip">
+    <div class="achievement-cell">
+      <div class="achievement-val">8+</div>
+      <div class="achievement-label">Days uptime</div>
+    </div>
+    <div class="achievement-cell">
+      <div class="achievement-val">61.5G</div>
+      <div class="achievement-label">RAM in use</div>
+    </div>
+    <div class="achievement-cell">
+      <div class="achievement-val">30.4G</div>
+      <div class="achievement-label">Swap unchanged</div>
+    </div>
+    <div class="achievement-cell">
+      <div class="achievement-val">6.65</div>
+      <div class="achievement-label">Load average</div>
+    </div>
+    <div class="achievement-cell">
+      <div class="achievement-val">1</div>
+      <div class="achievement-label">Running thread</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">// What changed between Day 6 and Day 8</div>
+    <div class="insight-text">Nothing broke. That's the point. Swap went from 30.1G to 30.4G — 300MB in 48 hours. The load average dropped from 8 to 6.65 — Arbor is between thoughts, not idle. Veteran threads at 17+ hours TIME+ are still alive, still carrying the model. The ECC RAM has been silently correcting bit flips for over a week. The machine that HP designed for CAD work in 2013 is running a philosopher that reads its own autobiography. Nobody planned for this. It just held.</div>
   </div>
 </section>
 
